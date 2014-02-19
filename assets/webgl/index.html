@@ -1,0 +1,285 @@
+<html>
+<head>
+    <title>One Million Particles</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: #111111;
+            margin: 0;
+        }
+
+        #help {
+            opacity:0.85;
+            position: fixed;
+            width: 400px;
+            height: 200px;
+            top: 50%;
+            left: 50%;
+            margin-top: -100px;
+            margin-left: -200px;
+            box-shadow: 0 0 20px #FFF;
+            border-radius:10px;
+            padding: 10px;
+            text-align: center;
+            font-family: sans-serif;
+            background: #FFF linear-gradient(170deg, #ffffff 0%, #e5ebee 30%, #d7dee3 32%, #8f9498 100%);
+
+        }
+
+        #help table {
+            margin: auto;
+
+
+        }
+
+        table, td, th {
+            border:1px solid black;
+            border-collapse:collapse;
+            padding: 3px;
+        }
+
+    </style>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-495210-3', 'googledrive.com');
+        ga('send', 'pageview');
+
+    </script>
+</head>
+<body id="body">
+<div id="help">
+    <h2>Help</h2>
+    <table>
+        <tr>
+            <td>Left click drag</td>
+            <td>Rotate view</td>
+        </tr>
+        <tr>
+            <td>Middle click drag or scroll</td>
+            <td>Zoom</td>
+        </tr>
+        <tr>
+            <td>Space or p</td>
+            <td>pause</td>
+        </tr>
+    </table>
+</div>
+<div id="container">
+</div>
+</body>
+<script type="x-shader/x-vertex" id="velVert">
+
+    // switch on high precision floats
+    #ifdef GL_ES
+    precision highp float;
+    #endif
+    varying vec2 vUv;
+    uniform float time;
+    void main()
+    {
+    vUv = uv;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);
+    }
+
+</script>
+<script type="x-shader/x-fragment" id="velFrag">
+
+    #ifdef GL_ES
+    precision highp float;
+    #endif
+
+    varying vec2 vUv;
+    uniform float time;
+    uniform sampler2D velTex;
+    uniform sampler2D posTex;
+    uniform vec3 targetPos;
+    uniform float gravDist;
+
+    void main()
+    {
+    vec3 vel = texture2D(velTex, vUv).rgb;
+    vec3 pos = texture2D(posTex, vUv).rgb;
+    float force = 10.0;
+
+
+    float dist = max(distance(targetPos, pos)*gravDist, 1.0);
+
+    vec3 delta = normalize(targetPos - pos);
+
+    vel = vel*0.90 + (delta * force)/(dist);
+
+    //conform it;
+    //vel = clamp(vel, -1.0, 1.0)/2.0+0.5;
+
+    gl_FragColor = vec4(vel, 1.0);
+    }
+</script>
+
+
+<script type="x-shader/x-vertex" id="posVert">
+
+    // switch on high precision floats
+    #ifdef GL_ES
+    precision highp float;
+    #endif
+    varying vec2 vUv;
+    uniform float time;
+    void main()
+    {
+    vUv = uv;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);
+    }
+
+</script>
+<script type="x-shader/x-fragment" id="posFrag">
+
+    #ifdef GL_ES
+    precision highp float;
+    #endif
+    varying vec2 vUv;
+    uniform float time;
+    uniform sampler2D velTex;
+    uniform sampler2D posTex;
+
+    void main()
+    {
+    vec3 vel = texture2D(velTex, vUv).rgb;
+    vec3 pos = texture2D(posTex, vUv).rgb;
+
+    pos += (vel)*0.01;
+
+    gl_FragColor = vec4(pos, 1.0);
+    }
+</script>
+
+
+
+
+
+
+<script type="x-shader/x-vertex" id="dispVert">
+
+    // switch on high precision floats
+    #ifdef GL_ES
+    precision highp float;
+    #endif
+
+    uniform float time;
+    uniform sampler2D posTex;
+    //attribute float id;
+    uniform float texSize;
+
+    //attribute vec3 normal;
+
+
+
+    void main()
+    {
+
+/*
+    normal.x;
+
+    //ivec2 size = textureSize2D(posTex);
+
+    float ix = mod(normal.x, texSize);
+
+    float iy = normal.x/texSize;
+
+    float x = ix/texSize;
+    float y = iy/texSize;
+
+    vec3 mvPosition = texture2D(posTex, vec2(x, y)).rgb;
+*/
+
+    vec3 mvPosition = texture2D(posTex, position.xy).rgb;
+
+    gl_PointSize = 1.0;
+
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(mvPosition,1.0);
+
+    }
+
+</script>
+<script type="x-shader/x-fragment" id="dispFrag">
+
+    #ifdef GL_ES
+    precision highp float;
+    #endif
+
+    uniform float time;
+
+
+    void main()
+    {
+    //float depth = gl_FragCoord.z*5.0;
+    //depth = depth*depth;
+    // vec3 color = vec3(0.5, 1.0, 0.1);
+    gl_FragColor = vec4(vec3(0.5, 1.0, 0.1), 0.05/*clamp(1.0/depth, 0.0, 1.0)*/);
+    }
+</script>
+
+
+
+<script type="x-shader/x-vertex" id="randVert">
+
+    // switch on high precision floats
+    #ifdef GL_ES
+    precision highp float;
+    #endif
+    varying vec2 vUv;
+
+    void main()
+    {
+    vUv = uv;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);
+    }
+
+</script>
+<script type="x-shader/x-fragment" id="randFrag">
+
+    #ifdef GL_ES
+    precision highp float;
+    #endif
+    varying vec2 vUv;
+
+
+
+    float rand(vec2 co){
+        return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
+    }
+
+    void main()
+    {
+
+    vec3 col;
+    col.r = rand(vec2(vUv.x, vUv.y));
+    col.g = rand(vec2(vUv.x, vUv.y + 1.0));
+    col.b = rand(vec2(vUv.x, vUv.y + 2.0));
+
+    gl_FragColor = vec4(col, 1.0);
+    }
+</script>
+
+
+
+
+
+<!--<script type="text/javascript" src="three/examples/js/libs/dat.gui.min.js"></script>-->
+<!--<script type="text/javascript" src="three/examples/js/libs/stats.min.js"></script>-->
+<!--<script type="text/javascript" src="three/build/three.js"></script>-->
+<!--<script type="text/javascript" src="three/examples/js/controls/OrbitControls.js"></script>-->
+
+
+<script type="text/javascript" src="dat.gui.min.js"></script>
+<script type="text/javascript" src="stats.min.js"></script>
+<script type="text/javascript" src="three.js"></script>
+<script type="text/javascript" src="OrbitControls.js"></script>
+
+<script type="text/javascript" src="jquery.min.js"></script>
+
+<script type="text/javascript" src="script.js"></script>
+</html>
