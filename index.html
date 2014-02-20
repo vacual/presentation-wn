@@ -119,7 +119,7 @@
 					<header><h2>离线存储</h2></header>
 					<p>迎接意外</p>
 					<img
-						src="http://www.html5rocks.com/static/images/identity/classes_64/HTML5_Offline_Storage_64.png"
+						src="images/HTML5_Offline_Storage_64.png"
 						title="HTML5 Offline &amp; Storage"
 						alt="HTML5 Offline &amp; Storage">
 				</section>
@@ -440,7 +440,7 @@ NETWORK:
 				<section class="slide middle transition-slide" id="realtime-title">
 					<header><h2>实时通讯</h2></header>
 					<p>保持连接</p>
-					<img src="http://www.html5rocks.com/static/images/identity/classes_64/HTML5_Connectivity_64.png"
+					<img src="images/HTML5_Connectivity_64.png"
 						title="HTML5 Realtime &amp; Communication" alt="HTML5 Realtime &amp; Communication">
 				</section>
 
@@ -545,9 +545,9 @@ socket.<b>onclose</b> = function(event) { alert('closed'); }
 
 			<section>
 				<section class="slide middle transition-slide" id="hardware-access-title">
-					<header><h2>File / Hardware Access</h2></header>
+					<header><h2>文件访问</h2></header>
 					<p>与操作系统深度融合</p>
-					<img src="http://www.html5rocks.com/static/images/identity/classes_64/HTML5_Device_Access_64.png" title="HTML5 Device Access" alt="HTML5 Device Access">
+					<img src="images/HTML5_Device_Access_64.png" title="HTML5 Device Access" alt="HTML5 Device Access">
 				</section>
 
 				<section class="slide" id="native-drag-and-drop">
@@ -575,7 +575,7 @@ socket.<b>onclose</b> = function(event) { alert('closed'); }
 						<h2>Desktop Drag-In (File API)</h2>
 					</header>
 					<div>
-						<p>Drag files in from the desktop:</p>
+						<p>从文件系统拖入文件</p>
 <pre>
 document.querySelector('#dd-dropzone').addEventListener('drop', function(e) {
   var reader = new <b>FileReader</b>();
@@ -587,7 +587,7 @@ document.querySelector('#dd-dropzone').addEventListener('drop', function(e) {
 </pre>
 <br/>
 						<div id="ddi-example">
-							<div id="ddi-dropzone">Drop in images from your desktop</div>
+							<div id="ddi-dropzone">从操作系统中拖入一张图片试试</div>
 						</div>
 						<div id="ddi-thumbnails"></div>
 
@@ -603,7 +603,7 @@ document.querySelector('#dd-dropzone').addEventListener('drop', function(e) {
 				<section class="slide" id="desktop-drag-out">
 					<header class="same-line"><span class="js">JS</span><h2>Desktop Drag-Out</h2></header>
 					<div>
-						<p>Drag files out onto the desktop:</p>
+						<p>拖出文件到文件系统</p>
 <pre>
 &lt;a href="assets/let_it_go_1.mp4" draggable="true" class="dragout"
    data-downloadurl="<b>MIMETYPE:FILENAME:ABSOLUTE_URI_TO_FILE</b>"&gt;download&lt;/a&gt;
@@ -619,17 +619,17 @@ for (var i = 0, file; file = files[i]; ++i) {
 </pre>
 <br/>
 						<div id="ddo-example">
-							Drag each of these files onto your desktop: 
+							将这些文件拖入到操作系统试试
 							<a href="assets/dive_into_html5.pdf" class="dragout"
 								data-downloadurl="application/pdf:DiveIntoHTML5.pdf:http://locahost/assets/dive_into_html5.pdf">
-								.pdf file
+								.pdf
 							</a>
 							<a href="assets/let_it_go_1.mp4" class="dragout"
 								data-downloadurl="video/mp4:LetItGo.mp4:http://locahost/assets/let_it_go_1.mp4">
-								.mp4 file
+								.mp4
 							</a>
 						</div>
-						<p>( this feature is only available in Google Chrome )</p>
+						<p>仅仅支持Google Chrome</p>
 						<script defer>
 							(function() {
 								var files = document.querySelectorAll('.dragout');
@@ -652,7 +652,7 @@ for (var i = 0, file; file = files[i]; ++i) {
 				<section class="slide" id="filewriter">
 					<header class="same-line"><span class="js">JS</span><h2>FileSystem APIs</h2></header>
 					<div>
-						<p>Asynchronously write a file to a sandboxed file system using JavaScript:</p>
+						<p>使用Javascript异步的将文件写入沙盒文件系统中</p>
 <pre>
 <b>window.requestFileSystem</b>(<b>window.TEMPORARY</b>, 1024 * 1024, function(fs) {
   // fs.root is a DirectoryEntry object.
@@ -668,7 +668,7 @@ for (var i = 0, file; file = files[i]; ++i) {
 }, opt_errorHandler);
 </pre>
 <br/>
-						<p>( The FileSystem API is currently only implemented in Google Chrome 9+ )</p>
+						<p>仅仅支持Google Chrome 9+</p>
 					</div>
 				</section>
 
@@ -684,7 +684,7 @@ for (var i = 0, file; file = files[i]; ++i) {
   }, errorHandler);
 }
 </pre>
-						<button id="geo-see-position">Show Position</button>
+						<button id="geo-see-position">当前位置（百度地图）</button>
 						<span id="geo-log"></span>
 						<div id="geo-map"></div>
 						<script src="js/da/geo.js" defer></script>
@@ -702,7 +702,7 @@ window.addEventListener('<em>deviceorientation</em>', function(event) {
   var g = event.<b>gamma</b>;
 }, false);
 </pre>
-						<button id="orientation-button" onclick="ori.onload();">Load Orientation</button>
+						<button id="orientation-button" onclick="ori.onload();">加载设备方向</button>
 						<p>
 						X axis:<span class="orientation-coordinate" id="orientation-x">x</span>
 						Y axis:<span class="orientation-coordinate" id="orientation-y">y</span>
@@ -717,7 +717,7 @@ window.addEventListener('<em>deviceorientation</em>', function(event) {
 								<div class="layer"><img src="assets/orientation/chrome-layer-05.png" /></div>
 							</div>
 						</div>
-						<p>This sample requires FF3.6+ or Google Chrome on a device with a built in accelerometer or iOS 4.2.</p>
+						<p>需要 FF3.6+ 或者 Google Chrome 并且设备支持方向传感器</p>
 						<script src="js/da/ori.js"></script>
 					</div>
 				</section>
@@ -730,9 +730,9 @@ window.addEventListener('<em>deviceorientation</em>', function(event) {
 							<div class="noflex vbox boxcenter" style="height: 300px; text-align: center">
 								<input id="speech-input-field" type="text" x-webkit-speech />
 								<p style="display: none">
-									Speech input is not enabled in your browser.<br> Try running Google Chrome with the
+									你的浏览器不支持语音输出
+									<br>请使用Google Chrome并在启动参数中添加
 									<code>--enable-speech-input</code>
-									flag.
 								</p>
 							</div>
 						</div>
@@ -748,9 +748,9 @@ window.addEventListener('<em>deviceorientation</em>', function(event) {
 
 			<section>
 				<section class="slide middle transition-slide" id="semantics-markup-title">
-					<header><h2>Semantics &amp; Markup</h2></header>
-					<p>More meaningful elements</p>
-					<img src="http://www.html5rocks.com/static/images/identity/classes_64/HTML5_Semantics_64.png"
+					<header><h2>语义标记</h2></header>
+					<p>使标签更有意义</p>
+					<img src="images/HTML5_Semantics_64.png"
 						title="HTML5 Semantics &amp; Markup" alt="HTML5 Semantics &amp; Markup">
 				</section>
 
@@ -834,7 +834,7 @@ window.addEventListener('<em>deviceorientation</em>', function(event) {
   This slide deck teaches you everything you need to know about HTML 5.
 &lt;<b>/details</b>&gt;
 <details>
-<summary>HTML 5</summary>This slide deck teaches you everything you need to know about HTML 5.
+<summary>HTML 5</summary>Web 开发的未来之路
 </details>
 </pre>
 
@@ -842,9 +842,9 @@ window.addEventListener('<em>deviceorientation</em>', function(event) {
 &lt;<b>meter</b> <b>min</b>="0" <b>max</b>="100" <b>low</b>="40" <b>high</b>="90" <b>optimum</b>="100" value="91"&gt;A+&lt;/<b>meter</b>&gt;
 Your score is: <meter value="91" min="0" max="100" low="40" high="90" optimum="100">A+</meter>
 &lt;<b>progress</b>&gt;working...&lt;/<b>progress</b>&gt;
-Download is: <progress>working...</progress>
+下载：<progress>working...</progress>
 &lt;<b>progress</b> value="75" <b>max</b>="100"&gt;3/4 complete&lt;/<b>progress</b>&gt;
-Goal is: <progress value="75" max="100">3/4 complete</progress>
+目标完成：<progress value="75" max="100">3/4 complete</progress>
 </pre>
 					</div>
 				</section>
@@ -887,7 +887,7 @@ Goal is: <progress value="75" max="100">3/4 complete</progress>
 						<figure id="microdata-screenshot">
 							<img src="assets/magpie.png" alt="Google Rich Snippets Tool screenshot" />
 							<figcaption>
-								Rich Snippets Testing Tool at <a href="http://www.google.com/webmasters/tools/richsnippets">http://www.google.com/webmasters/tools/richsnippet</a>
+								Google 网页摘要测试工具<a href="http://www.google.com/webmasters/tools/richsnippets">http://www.google.com/webmasters/tools/richsnippet</a>
 							</figcaption>
 						</figure>
 					</div>
@@ -958,28 +958,28 @@ Goal is: <progress value="75" max="100">3/4 complete</progress>
 							<pre>type="<em>text</em>"</pre>
 							<figure>
 								<img src="assets/android-form-text.png" alt="android keyboard on input type text" />
-								<figcaption>Android Device</figcaption>
+								<figcaption>Android</figcaption>
 							</figure>
 						</div>
 						<div>
 							<pre>type="<em>number</em>"</pre>
 							<figure>
 								<img src="assets/android-form-number.png" alt="android keyboard on input type number" />
-								<figcaption>Android Device</figcaption>
+								<figcaption>Android</figcaption>
 							</figure>
 						</div>
 						<div>
 							<pre>type="<em>email</em>"</pre>
 							<figure>
 								<img src="assets/iphone-form-email.png" alt="iphone keyboard on input type email" />
-								<figcaption>iPhone Device</figcaption>
+								<figcaption>iOS</figcaption>
 							</figure>
 						</div>
 						<div>
 							<pre>type="<em>tel</em>"</pre>
 							<figure>
 								<img src="assets/iphone-form-tel.png" alt="iphone keyboard on input type tel" />
-								<figcaption>iPhone Device</figcaption>
+								<figcaption>iOS</figcaption>
 							</figure>
 						</div>
 					</div>
@@ -989,11 +989,11 @@ Goal is: <progress value="75" max="100">3/4 complete</progress>
 
 			<section>
 				<section class="slide middle transition-slide" id="graphics-multimedia-title">
-					<header><h2>Graphics / Multimedia</h2></header>
+					<header><h2>图形及多媒体</h2></header>
 					<p>2D &amp; 3D</p>
-					<img src="http://www.html5rocks.com/static/images/identity/classes_64/HTML5_3D_Effects_64.png"
+					<img src="images/HTML5_3D_Effects_64.png"
 						title="HTML5 3D &amp; Effects" alt="HTML5 3D &amp; Effects">
-					<img src="http://www.html5rocks.com/static/images/identity/classes_64/HTML5_Multimedia_64.png" title="HTML5 Multimedia"
+					<img src="images/HTML5_Multimedia_64.png" title="HTML5 Multimedia"
 						alt="HTML5 Multimedia">
 				</section>
 
@@ -1285,7 +1285,7 @@ pre<b>:-webkit-full-screen</b> {
 				<section class="slide middle transition-slide" id="css3-title">
 					<header><h2>CSS3</h2></header>
 					<p>Presentation &amp; Styling</p>
-					<img src="http://www.html5rocks.com/static/images/identity/classes_64/HTML5_Styling_64.png" title="HTML5 Styling"
+					<img src="images/HTML5_Styling_64.png" title="HTML5 Styling"
 						alt="HTML5 Styling">
 				</section>
 
@@ -2049,7 +2049,7 @@ div {
 				<section class="slide middle transition-slide" id="performance-title">
 					<header><h2>Performance</h2></header>
 					<p>Improvements to the core platform</p>
-					<img src="http://www.html5rocks.com/static/images/identity/classes_64/HTML5_Performance_64.png"
+					<img src="images/HTML5_Performance_64.png"
 						title="HTML5 Performance &amp; Integration" alt="HTML5 Performance &amp; Integration">
 				</section>
 
@@ -2164,28 +2164,6 @@ window.addEventListener('<em>popstate</em>', function(event) {
 				</section>
 			</section>
 
-
-				<section>
-					<h2>Global State</h2>
-					<p>
-						Set <code>data-state="something"</code> on a slide and <code>"something"</code>
-						will be added as a class to the document element when the slide is open. This lets you
-						apply broader style changes, like switching the background.
-					</p>
-				</section>
-
-				<section data-state="customevent">
-					<h2>Custom Events</h2>
-					<p>
-						Additionally custom events can be triggered on a per slide basis by binding to the <code>data-state</code> name.
-					</p>
-					<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
-Reveal.addEventListener( 'customevent', function() {
-	console.log( '"customevent" has fired' );
-} );
-					</code></pre>
-				</section>
-
 			</div>
 
 		</div>
@@ -2215,8 +2193,6 @@ Reveal.addEventListener( 'customevent', function() {
 				// Optional libraries used to extend on reveal.js
 				dependencies: [
 					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
 					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
 					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
