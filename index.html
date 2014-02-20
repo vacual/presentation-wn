@@ -484,33 +484,31 @@ socket.<b>onmessage</b> = function(event) { alert(event.data); }
 socket.<b>onclose</b> = function(event) { alert('closed'); }
 </pre>
 
-						<p id="ws-introduction">Full-duplex, bi-directional communication over the Web: Both the server and client
-							can send data at any time, or even at the same time. Only the data itself is sent, without the overhead of HTTP
-							headers, dramatically reducing bandwidth.</p>
+						<p id="ws-introduction">在浏览器中实现和服务器端双向通信。双向通信可以拓展浏览器上的应用类型，例如实时的数据推送（股票行情）、游戏、聊天等。</p>
 
 						<div id="ws-left">
-							Use the echo demo below to test a WebSocket connection from your browser. Both the message you send and the
-							response you receive travel over the same WebSocket connection.
-
+							简单的each的演示，收发消息使用了同一个WebSocket连接
 							<div id="ws-config-location">
-								<h4>Location:</h4>
-								<input type="text" id="ws-uri" disabled /> <br> <input type="checkbox" id="ws-secure"
-									onclick="wsToggleTls();" disabled /> <label id="ws-secure-label" for="ws-secure">Use secure WebSocket
-									(TLS/SSL)</label> <br>
-								<button id="ws-connect" disabled>Connect</button>
-								<button id="ws-disconnect" disabled>Disconnect</button>
+								<h4>WebSocket地址</h4>
+								<input type="text" id="ws-uri" disabled />
+								<br/>
+								<input type="checkbox" id="ws-secure" onclick="wsToggleTls();" disabled />
+								<label id="ws-secure-label" for="ws-secure">使用 TLS/SSL</label>
+								<br/>
+								<button id="ws-connect" disabled>连接</button>
+								<button id="ws-disconnect" disabled>断开</button>
 							</div>
 							<div id="ws-config-message">
-								<h4>Message:</h4>
+								<h4>消息：</h4>
 								<input type="text" id="ws-message" value="Hello, WebSocket" disabled />
-								<button id="ws-send" disabled>Send</button>
+								<button id="ws-send" disabled>发送</button>
 							</div>
 						</div>
 						<div id="ws-right">
 							<div id="ws-log">
-								<strong>Output:</strong>
+								<strong>输出：</strong>
 								<div id="ws-console-log"></div>
-								<button id="ws-clear-log">Clear log</button>
+								<button id="ws-clear-log">清除输出</button>
 							</div>
 						</div>
 						<div id="ws-powered">
@@ -534,11 +532,11 @@ socket.<b>onclose</b> = function(event) { alert('closed'); }
 }
 </pre>
 						<div id="notifications-message">
-							<button id="request-permission">Set notification permissions for this page</button>
-							<p>Note: Use this button if you also want to <em>reset</em> the permissions</p>
+							<button id="request-permission">获取当前页面的通知权限</button>
+							<p>该按钮同时可以<em>重置</em>权限</p>
 							<br>
-							<p>Show the notifications</p>
-							<button id="show-tweets">Show notifications</button>
+							<p>弹出通知</p>
+							<button id="show-tweets">弹出通知</button>
 						</div>
 						<script src="js/rc/na.js" defer></script>
 					</div>
@@ -548,7 +546,7 @@ socket.<b>onclose</b> = function(event) { alert('closed'); }
 			<section>
 				<section class="slide middle transition-slide" id="hardware-access-title">
 					<header><h2>File / Hardware Access</h2></header>
-					<p>Deeper integration with the Operating System</p>
+					<p>与操作系统深度融合</p>
 					<img src="http://www.html5rocks.com/static/images/identity/classes_64/HTML5_Device_Access_64.png" title="HTML5 Device Access" alt="HTML5 Device Access">
 				</section>
 
@@ -563,17 +561,19 @@ socket.<b>onclose</b> = function(event) { alert('closed'); }
 <br/>
 						<ol id="dnd-drag-zone">
 							<li><img src="assets/dwd1.png" draggable /></li>
-							<li><span class="draggable-text" draggable>Select text and drag (original text will be dropped)</span></li>
-							<li><span class="draggable-text" draggable>Select text and drag (dragged text data
-									will be altered from original)</span></li>
+							<li><span class="draggable-text" draggable>Select text and drag</span></li>
+							<li><span class="draggable-text" draggable>选择并拖拽文字试试:-)</span></li>
 						</ol>
-						<div id="dnd-drop-zone">Drop Area</div>
+						<div id="dnd-drop-zone">目标区域</div>
 						<script src="js/da/dnd.js" defer></script>
 					</div>
 				</section>
 
 				<section class="slide" id="desktop-drag-in">
-					<header class="same-line"><span class="js">JS</span><h2>Desktop Drag-In (File API)</h2></header>
+					<header class="same-line">
+						<span class="js">JS</span>
+						<h2>Desktop Drag-In (File API)</h2>
+					</header>
 					<div>
 						<p>Drag files in from the desktop:</p>
 <pre>
