@@ -545,7 +545,7 @@ socket.<b>onclose</b> = function(event) { alert('closed'); }
 
 			<section>
 				<section class="slide middle transition-slide" id="hardware-access-title">
-					<header><h2>文件访问</h2></header>
+					<header><h2>设备访问</h2></header>
 					<p>与操作系统深度融合</p>
 					<img src="images/HTML5_Device_Access_64.png" title="HTML5 Device Access" alt="HTML5 Device Access">
 				</section>
@@ -723,7 +723,10 @@ window.addEventListener('<em>deviceorientation</em>', function(event) {
 				</section>
 
 				<section class="slide" id="speech-input">
-					<header class="same-line"><span class="html">HTML</span><h2>Speech Input</h2></header>
+					<header class="same-line">
+						<span class="html">HTML</span>
+						<h2>Speech Input</h2>
+					</header>
 					<div>
 						<pre>&lt;input type="text" <b>x-webkit-speech</b> /&gt;</pre>
 						<div class="flex hbox boxcenter">
@@ -744,6 +747,29 @@ window.addEventListener('<em>deviceorientation</em>', function(event) {
 					</div>
 				</section>
 
+				<section class="slide" id="speech-synthesis">
+					<header class="same-line">
+						<span class="js">JS</span>
+						<h2>Speech Synthesis API</h2>
+					</header>
+					<div>
+<pre>
+var msg = new SpeechSynthesisUtterance('Hello World');
+speechSynthesis.speak(msg);
+</pre>
+						<div id="speech-content">
+							<div>
+								<input id="speech-content-en-us" type="text" value="Hello, welcome to Web Speech Synthesis"/>
+								<button id="read-en-content" onclick="speechContent('en-us')">Read</button>
+							</div>
+							<div>
+								<input id="speech-content-zh-cn" type="text" value="你好，欢迎进入语音Web时代"/>
+								<button id="read-zh-content" onclick="speechContent('zh-cn')">阅读</button>
+							</div>
+						</div>
+						<script src="js/da/speech.js" defer></script>
+					</div>
+				</section>
 			</section>
 
 			<section>
@@ -855,17 +881,17 @@ Your score is: <meter value="91" min="0" max="100" low="40" high="90" optimum="1
 						<h2>Descriptive link relations</h2>
 					</header>
 					<div>
-<pre>&lt;link <b>rel="alternate"</b> type="application/rss+xml" href="http://myblog.com/feed"/&gt;
+<pre>&lt;link <b>rel="alternate"</b> type="application/rss+xml" href="http://halo9pan.info/feed"/&gt;
 &lt;link <b>rel="icon"</b> href="/favicon.ico"/&gt;
-&lt;link <b>rel="pingback"</b> href="http://myblog.com/xmlrpc.php"/&gt;
-&lt;link <b>rel="prefetch"</b> href="http://myblog.com/main.php"/&gt;
+&lt;link <b>rel="pingback"</b> href="http://halo9pan.info/xmlrpc.php"/&gt;
+&lt;link <b>rel="prefetch"</b> href="http://halo9pan.info/"/&gt;
 ...
 
 &lt;a <b>rel="archives"</b> href="http://myblog.com/archives"&gt;<span class="underlined">old posts</span>&lt;/a&gt;
 &lt;a <b>rel="external"</b> href="http://notmysite.com"&gt;<span class="underlined">tutorial</span>&lt;/a&gt;
 &lt;a <b>rel="license"</b> href="http://www.apache.org/licenses/LICENSE-2.0"&gt;<span class="underlined">license</span>&lt;/a&gt;
 &lt;a <b>rel="nofollow"</b> href="http://notmysite.com/sample"&gt;<span class="underlined">wannabe</span>&lt;/a&gt;
-&lt;a <b>rel="tag"</b> href="http://myblog.com/category/games"&gt;<span class="underlined">games posts</span>&lt;/a&gt;
+&lt;a <b>rel="tag"</b> href="http://halo9pan.info/category/codeway"&gt;<span class="underlined">CodeWay</span>&lt;/a&gt;
 ...
 </pre>
 
@@ -2138,6 +2164,53 @@ console.log(el.<b>classList</b>.toString() == el.className); // true
 <pre>
 &lt;div id="main" class="rounded"&gt;&lt;/div&gt;
 </pre>
+					</div>
+				</section>
+
+				<section class="slide" id="prefetch-prerender">
+					<header class="same-line">
+						<span class="html">HTML</span>
+						<h2>Prefetch and Prerender</h2>
+					</header>
+					<div>
+<pre>
+&lt;link <b>rel="prefetch"</b> href="http://halo9pan.info"/&gt;
+&lt;link <b>rel="prefetch"</b> href="http://halo9pan.info"/&gt;
+</pre>
+
+					</div>
+				</section>
+
+				<section class="slide" id="page-visibility">
+					<header class="same-line">
+						<span class="js">JS</span>
+						<h2>Page Visibility API</h2>
+					</header>
+					<div>
+<pre>
+document.addEventListener('<b>visibilitychange</b>', function(e) {
+  // Start or stop processing depending on state
+  if(document.hidden) {
+    ...
+  }
+}, false);
+</pre>
+						<video width="480" height="208" id="page-visibility-video" controls>
+							<source src="assets/let_it_go_1.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"' />
+							Your browser does not support the video tag
+						</video>
+						<script defer>
+						(function(){
+							document.addEventListener('visibilitychange', function(e) {
+								var v = document.getElementById('page-visibility-video');
+								if(document.hidden) {
+								    v.pause();
+								} else {
+									v.play();
+								}
+								}, false);
+						}());
+						</script>
 					</div>
 				</section>
 
